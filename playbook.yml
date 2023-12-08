@@ -1,9 +1,9 @@
 - name: firewall example files
   hosts: dev
   gather_facts: false
- vars:
+  vars:
    ansible_python_interpreter: /usr/bin/python3
- tasks:
+  tasks:
    - name: Ensure the file f5
      command:
        cmd: touch /tmp/f5
