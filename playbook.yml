@@ -1,9 +1,9 @@
-- name: My first play
-  hosts: all
-  tasks:
-   - name: Ping my hosts
-     ansible.builtin.ping:
-
-   - name: Print message
-     ansible.builtin.debug:
-      msg: Hello world
+- name: firewall example files
+  hosts: dev
+  gather_facts: false
+ vars:
+   ansible_python_interpreter: /usr/bin/python3
+ tasks:
+   - name: Ensure the file f5
+     command:
+       cmd: touch /tmp/f5
