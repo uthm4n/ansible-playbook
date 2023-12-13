@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 - name: firewall example files
   hosts: dev
   gather_facts: false
@@ -7,3 +8,14 @@
    - name: Ensure the file f5
      command:
        cmd: touch /tmp/f5
+=======
+- name: My first play
+  hosts: all
+  tasks:
+   - name: Ping my hosts
+     ansible.builtin.ping:
+
+   - name: Print message
+     ansible.builtin.debug:
+      msg: Hello world
+>>>>>>> parent of 30aaf67 (Update playbook.yml)
