@@ -1,6 +1,6 @@
 - name: copy multiple files
   copy:
-    src: "{{ item.src }}"
+    src: "/tmp/"
     dest: "/tmp/"
     remote_src: true
   loop:
