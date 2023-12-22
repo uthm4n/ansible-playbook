@@ -1,5 +1,5 @@
 - name: Copy each file over that matches the given pattern
-  ansible.builtin.copy:
+  copy:
     src: "{{ item }}"
     dest: "/tmp/"
   with_fileglob:
