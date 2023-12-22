@@ -1,6 +1,10 @@
-- name: Copy each file over that matches the given pattern
+- name: copy multiple files
   copy:
-    src: "{{ item }}"
+    src: "{{ item.src }}"
     dest: "/tmp/"
-  with_fileglob:
-    - "/tmp/uthman*.test.gz"
+    remote_src: true
+  loop:
+    - {src: '/tmp/uthman.test.gz', dest: '/tmp/uthman-1.gz'}
+    - {src: '/tmp/uthman-2.test.gz', dest: '/tmp/uthman-2.gz'}
+    - {src: '/tmp/uthman-3.test.gz', dest: '/tmp/uthman-3.gz'}
+  become: true
