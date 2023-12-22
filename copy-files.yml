@@ -1,8 +1,6 @@
-- name: Prepare temporary files.
-  tasks:
-   no_log: false
-   copy:
-     src: /tmp/"{{item}}"
-     dest: "/tmp/"
-     with_items:
-      ['uthman.test.gz', 'uthman-1.test.gz', 'uthman-2.test.gz']
+- name: Copy each file over that matches the given pattern
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/tmp/"
+  with_fileglob:
+    - "/tmp/uthman*.test.gz"
