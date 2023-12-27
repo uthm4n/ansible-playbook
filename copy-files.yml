@@ -1,6 +1,6 @@
-hosts: all
-tasks:
-  - name: Copy file
-    copy:
-      src: /tmp/flit_core.gz
-      dest: /tmp/flit_core_copied.gz
+- hosts: all
+  tasks:
+    - name: Copy file
+      copy:
+        src: /tmp/flit_core.gz
+        dest: /tmp/flit_core_copied.gz
