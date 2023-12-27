@@ -1,10 +1,6 @@
 - name: copy multiple files
   copy:
-    src: "/tmp/"
+    src: "/tmp/flit_core.gz"
     dest: "/tmp/"
     remote_src: true
-  loop:
-    - {src: '/tmp/uthman.test.gz', dest: '/tmp/uthman-1.gz'}
-    - {src: '/tmp/uthman-2.test.gz', dest: '/tmp/uthman-2.gz'}
-    - {src: '/tmp/uthman-3.test.gz', dest: '/tmp/uthman-3.gz'}
   become: true
