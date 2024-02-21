@@ -1,5 +1,5 @@
 ---
-- hosts: uthman-ubuntu-test-1.localdomain
+- hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
   tasks:
     - name: Disable cloud-init
       ansible.builtin.file:
