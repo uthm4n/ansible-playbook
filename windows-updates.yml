@@ -1,5 +1,5 @@
 - name:  Windows Update
-  hosts: "{{ morpheus['instance']['containerDetails'][0]['externalFqdn'] }}"
+  hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
   gather_facts: false
   tasks:
     - name: Running Windows Update
