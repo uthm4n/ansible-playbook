@@ -1,21 +1,9 @@
----
-= name: Windows updates playbook
-hosts: "{{ morpheus['instance']['containerDetails'][0]['externalFqdn'] }}"
-tasks:
-    win_updates:
-      category_names:
-        - Application
-        - Connectors
-        - CriticalUpdates
-        - DefinitionUpdates
-        - DeveloperKits
-        - FeaturePacks
-        - Guidance
-        - SecurityUpdates
-        - ServicePacks
-        - Tools
-        - UpdateRollups
-        - Updates
-    reboot: yes
-    register: windows_result
-    ignore_errors: yes
+- name:  Windows Update
+  hosts: "{{ morpheus['instance']['containerDetails'][0]['externalFqdn'] }}"
+  gather_facts: false
+  tasks:
+    - name: Running Windows Update
+      win_updates:
+        category_names: ['SecurityUpdates','CriticalUpdates','UpdateRollups', 'Updates', 'DefinitionUpdates', 'DeveloperKits', 'FeaturePacks', 'Connectors', 'Application', 'Guidance', 'ServicePacks', 'Tools' ]
+        reboot: yes
+        ignore_errors: yes
