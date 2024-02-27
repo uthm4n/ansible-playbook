@@ -1,5 +1,5 @@
 ---
-= name: "Windows updates playbook"
+= name: Windows updates playbook
 hosts: "{{ morpheus['instance']['containerDetails'][0]['externalFqdn'] }}"
 tasks:
     win_updates:
