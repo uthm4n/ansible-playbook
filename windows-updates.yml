@@ -1,10 +1,9 @@
 ---
-= name: Windows updates playbook
-  hosts: "{{ morpheus['instance']['containerDetails'][0]['externalFqdn'] }}"
-  tasks:
-    - name: "Install all updates"
-      win_updates:
-        category_names:
+= name: "Windows updates playbook"
+hosts: "{{ morpheus['instance']['containerDetails'][0]['externalFqdn'] }}"
+tasks:
+    win_updates:
+      category_names:
         - Application
         - Connectors
         - CriticalUpdates
@@ -17,6 +16,6 @@
         - Tools
         - UpdateRollups
         - Updates
-        reboot: yes
-      register: windows_result
-      ignore_errors: yes
+    reboot: yes
+    register: windows_result
+    ignore_errors: yes
