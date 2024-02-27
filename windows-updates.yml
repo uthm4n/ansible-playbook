@@ -1,7 +1,7 @@
 ---
-hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
+= name: Windows updates playbook
+hosts: "{{ morpheus['instance']['containerDetails'][0]['externalFqdn'] }}"
 tasks:
-  
   - name: "Install all updates"
     win_updates:
       category_names:
