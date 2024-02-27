@@ -1,5 +1,5 @@
 - name:  Windows Update
-  hosts: "{{ morpheus['instance']['containerDetails'][0]['externalFqdn'] }}"
+  hosts: uthman-windows-3.localdomain
   gather_facts: false
   tasks:
     - name: Running Windows Update
