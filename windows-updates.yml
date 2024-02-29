@@ -6,3 +6,4 @@
       win_updates:
         category_names: ['SecurityUpdates','CriticalUpdates','UpdateRollups', 'Updates', 'DefinitionUpdates', 'DeveloperKits', 'FeaturePacks', 'Connectors', 'Application', 'Guidance', 'ServicePacks', 'Tools' ]
         reboot: yes
+        ignore_errors: yes
