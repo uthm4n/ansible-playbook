@@ -5,14 +5,16 @@
     - name: Running Security, Critical, and Update Rollups
       win_updates:
         category_names: ['SecurityUpdates','CriticalUpdates','UpdateRollups']
-        reboot: no
-    
+      register: windows_updates
+      
     - name: Check that the Morpheus Windows Agent is running
       ansible.windows.win_reboot:
           test_command: 'Get-Service | Where-Object {($_.Status -eq "Running") -and ($_.Name -eq "Morpheus Windows Agent")}'
-          
+      when: windows_updates.reboot_required
+      
     - name: Ensure WinRM starts when the system has settled and is ready to work reliably
       ansible.windows.win_service:
         name: WinRM
         start_mode: delayed
+      when: windows_updates.reboot_required
 # ['Updates', 'DefinitionUpdates', 'DeveloperKits', 'FeaturePacks', 'Connectors', 'Application', 'Guidance', 'ServicePacks', 'Tools' ]
