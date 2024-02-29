@@ -1,9 +1,13 @@
-- name:  Windows Update
+- name:  Windows Updates
   hosts: uthman-windows-3.localdomain
   gather_facts: false
   tasks:
-    - name: Running Windows Update
+    - name: Running Security, Critical, and Update Rollups
       win_updates:
-        category_names: ['SecurityUpdates','CriticalUpdates','UpdateRollups', 'Updates', 'DefinitionUpdates', 'DeveloperKits', 'FeaturePacks', 'Connectors', 'Application', 'Guidance', 'ServicePacks', 'Tools' ]
-        reboot: yes
-        ignore_errors: yes
+        category_names: ['SecurityUpdates','CriticalUpdates','UpdateRollups']
+        reboot: false
+    - name: Check that the Morpheus Windows Agent is running
+      ansible.windows.win_reboot:
+          test_command: 'exit (Get-Service -Name "Morpheus Windows Agent").Status -ne "Running"'
+
+# ['Updates', 'DefinitionUpdates', 'DeveloperKits', 'FeaturePacks', 'Connectors', 'Application', 'Guidance', 'ServicePacks', 'Tools' ]
