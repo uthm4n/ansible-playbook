@@ -1,0 +1,9 @@
+---
+- hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}" 
+  tasks:   
+    - name: Ping test
+      ansible.builtin.ping:
+
+    - name: Continuing
+      debug:
+        msg: "Continuing to next task..."

@@ -1,0 +1,14 @@
+---
+- hosts: "{{ morpheus['instance']['containerDetails[0]']['externalFqdn'] }}" 
+  tasks:   
+    - name: Ping test
+      ansible.builtin.ping:
+
+    - name: Continuing
+      debug:
+        msg: "Continuing to next task..."
+        
+    - name: Sleep for 300 seconds and continue with play
+      ansible.builtin.wait_for:
+        timeout: 300
+        delegate_to: localhost

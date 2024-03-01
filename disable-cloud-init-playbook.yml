@@ -1,0 +1,11 @@
+---
+- hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}" 
+  tasks:   
+    - name: Disable cloud-init
+      ansible.builtin.file:
+        path: /etc/cloud/cloud-init.disabled
+        state: touch
+ 
+    - name: Output message
+      debug:
+        msg: "Restarting server"
