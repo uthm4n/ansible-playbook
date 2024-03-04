@@ -1,6 +1,6 @@
 ---
 - hosts:
-    - "{{ morpheus['instance']['containerDetails'][0]['externalFqdn'] }}"
+    - "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
   tasks:
     - name: Restart the instance...
       uri:
