@@ -8,6 +8,7 @@
         method: PUT
         headers:
           accept: application/json
+          authorization: "Bearer + {{ morpheus['apiAccessToken'] }}"
         validate_certs: no
         return_content: yes
       register: result
