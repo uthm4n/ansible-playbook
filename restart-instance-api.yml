@@ -8,7 +8,7 @@
         method: PUT
         headers:
           accept: application/json
-          authorization: "Bearer + {{ cypher.read('secret/apitoken') }}"
+          authorization: "Bearer + {{ morpheus['cypher']['read']['secret/apitoken'] }}"
         validate_certs: no
         return_content: yes
       register: result
