@@ -12,3 +12,8 @@
         validate_certs: no
         return_content: yes
       register: result
+    
+    - name: Debug info from previous task
+      ansible.builtin.debug:
+        var: result
+        verbosity: 2
