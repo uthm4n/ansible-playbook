@@ -2,18 +2,28 @@
 - hosts:
     - "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
   tasks:
+    - name: Ping
+      ansible.builtin.ping: null
     - name: Restart the instance...
       uri:
-        url: "https://ueqbal-morph-appliance.localdomain/api/instances/{{ morpheus['instance']['id'] }}/restart"
+        url: https://ueqbal-morph-appliance.localdomain/api/instances/{{morpheus['instance']['id'] }}/restart
         method: PUT
         headers:
           accept: application/json
-          authorization: "Bearer {{ lookup('cypher','secret=secret/apitoken') }}"
+          authorization: Bearer {{ lookup('cypher','secret=secret/apitoken') }}
         validate_certs: no
         return_content: yes
-      register: result
-    
+      register: restart
+      notify: Restart instance
     - name: Debug info from previous task
       ansible.builtin.debug:
-        var: result
+        var: restart
         verbosity: 2
+  handlers:
+    - name: Wait for server to restart
+      local_action:
+        module: wait_for 
+          host={{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }} 
+          port=22 
+          delay=10
+        become: false
