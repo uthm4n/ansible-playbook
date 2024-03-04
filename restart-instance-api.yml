@@ -2,12 +2,13 @@
 - hosts: "{{ morpheus['instance']['containerDetails[0]']['externalFqdn'] }}"
   tasks:
     - name: Restart the instance...
-  uri:
-    url: "https://ueqbal-morph-appliance.localdomain/api/instances/{{ morpheus['instance']['id'] }}/restart"
-    method: PUT
-    headers:
-      accept: application/json
-      authorization: "Bearer {{ morpheus['apiAccessToken'] }}"
-    validate_certs: no
-    return_content: yes
+      uri:
+        url: https://ueqbal-morph-appliance.localdomain/api/instances/{{
+          morpheus['instance']['id'] }}/restart
+        method: PUT
+        headers:
+          accept: application/json
+          authorization: Bearer {{ morpheus['apiAccessToken'] }}
+        validate_certs: no
+        return_content: yes
   register: result
