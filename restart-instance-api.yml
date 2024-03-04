@@ -4,23 +4,17 @@
   tasks:
     - name: Ping
       ansible.builtin.ping: null
-    - name: Restart the instance...
-      uri:
-        url: https://ueqbal-morph-appliance.localdomain/api/instances/{{morpheus['instance']['id'] }}/restart
-        method: PUT
-        headers:
-          accept: application/json
-          authorization: Bearer {{ lookup('cypher','secret=secret/apitoken') }}
-        validate_certs: no
-        return_content: yes
-      register: restart
-      notify: Restart instance
+    - name: Reboot the instance with the Ansible module...
+      reboot:
+        post_reboot_delay: 180
+        test_command: morpheus-node-ctl status
+      register: rebooted
     - name: Debug info from previous task
       ansible.builtin.debug:
-        var: restart
+        var: rebooted
         verbosity: 2
   handlers:
-    - name: Wait for server to restart
+    - name: Wait for server to come back online...
       local_action:
         module: wait_for 
           host={{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }} 
