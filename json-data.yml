@@ -1,14 +1,15 @@
 - name:  Retrieve JSON from Cypher
   hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
-  var: badJSON
+  vars: 
+    badJSON: "{{ lookup('cypher','secret=secret/jsontestgoodjson') }}"
   tasks:
   - name: Process JSON
     debug:
       msg: 'This is the JSON processed: "{{ lookup("cypher","secret=secret/jsontestgoodjson") }}"'
       with_items:
         -"{{ lookup('cypher','secret=secret/jsontestgoodjson') }}"
-    register: badJSON
+    register: jsonOutput
   
   - name: Debug Bad JSON
     debug:
-      var: badJSON
+      var: jsonOutput
