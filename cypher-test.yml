@@ -5,4 +5,4 @@
      tasks:
       - name: Process JSON
         debug:
-          msg: Good JSON is "{{ lookup('cypher','secret=secret/jsontest') }}"
+          msg: Good JSON is "{{ lookup('cypher','secret=secret/jsontest') | from_json }}"
