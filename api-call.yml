@@ -1,5 +1,5 @@
 ---
-hosts: "{{ morpheus['instance']['hostname'] + '.' + "{{ morpheus['instance']['domainName'] }}"
+hosts: "{{ morpheus['instance']['hostname'] }}" + '.' + "{{ morpheus['instance']['domainName'] }}"
 vars:
   instance_id: "{{ morpheus['instance']['id'] }}"
 tasks:
