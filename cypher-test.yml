@@ -2,15 +2,17 @@
   hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
   vars:
     ansible_python_interpreter: /usr/bin/python3
+    goodJSON: "{{ lookup('cypher','secret=secret/jsontestgoodjson') }}"
+    badJSON: "{{ lookup('cypher','secret=secret/jsontest') }}"
   tasks:
   - name: Good JSON
     debug:
-      msg: "Good JSON is {{ lookup('cypher','secret=secret/jsontestgoodjson') }}"
-    register: goodJSON
+      msg: "Good JSON is {{ goodJSON }}"
+    register: goodJSONOutput
   - name: Bad JSON
     debug:
-      msg: "Bad JSON is {{ lookup('cypher','secret=secret/jsontest') }}"
-    register: badJSON
+      msg: "Bad JSON is {{ badJSON }}"
+    register: badJSONOutput
 
   - debug:
-      var: badJSON
+      var: badJSONOutput
