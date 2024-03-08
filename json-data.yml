@@ -5,7 +5,7 @@
   tasks:
   - name: Process JSON
     debug:
-      msg: 'This is the JSON processed: "{{ lookup("cypher","secret=secret/jsontestgoodjson") }}"'
+      msg: 'This is the JSON processed: "{{ badJSON }}"'
     with_items:
         -"{{ lookup('cypher','secret=secret/jsontestgoodjson') }}"
     register: jsonOutput
