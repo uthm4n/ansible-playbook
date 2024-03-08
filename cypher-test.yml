@@ -1,6 +1,6 @@
-- name:  Retrieve JSON from Cypher
-  hosts: uthman-6.0.6-test.localdomain
-  gather_facts: false
+- hosts:
+    - "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
+  gather_facts: true
   tasks:
       - name: Process JSON
         debug:
