@@ -6,4 +6,4 @@
       - name: Process JSON
         debug:
           msg: 
-           - "This is the JSON processed: {{ lookup('cypher','secret=secret/jsontest') }}"
+           - "This is the JSON processed: " {{ lookup('cypher','secret=secret/jsontest') }}
