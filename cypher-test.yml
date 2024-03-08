@@ -2,7 +2,6 @@
   hosts: uthman-6.0.6-test.localdomain
   gather_facts: false
   tasks:
-     tasks:
       - name: Process JSON
         debug:
           msg: "Good JSON is {{ lookup('cypher','secret=secret/jsontestgoodjson') | from_json }}"
