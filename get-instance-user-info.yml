@@ -3,8 +3,16 @@
   tasks:
    - name: get user login
      ansible.builtin.set_fact:
-        username: "{{ lookup('cypher','secret=secret/ueqbal/test') }}"
- 
-   - name: Debug cypher lookup
+        username1: "{{ lookup('cypher','secret=secret/ueqbal/test') }}"
+        username2: "{{ lookup('cypher','secret=secret/ueqbal') }}"
+        username3: "{{ lookup('cypher','secret=secret/ueqbal/') }}"
+
+   - name: secret/ueqbal/test
      ansible.builtin.debug:
-        var: username
+        var: username1
+   - name: secret/ueqbal
+     ansible.builtin.debug:
+        var: username2
+   - name: secret/ueqbal/
+     ansible.builtin.debug:
+        var: username3
