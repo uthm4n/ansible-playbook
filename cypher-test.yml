@@ -1,7 +1,16 @@
-- hosts:
-    - "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
-  ansible_python_interpreter: /usr/bin/python3
+- name: JSON Processor via Cypher
+  hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
   tasks:
-      - name: Process JSON
-        debug:
-          msg: "Good JSON is {{ lookup('cypher','secret=secret/jsontestgoodjson') | from_json }}"
+  - name: Good JSON
+    debug:
+      msg: "Good JSON is {{ lookup('cypher','secret=secret/jsontestgoodjson') | to_json }}"
+    register: goodJSON
+  - name: Bad JSON
+    debug:
+      msg: "Bad JSON is {{ lookup('cypher','secret=secret/jsontest') | to_json }}"
+    register: badJSON
+
+  - debug:
+      var: goodJSON
