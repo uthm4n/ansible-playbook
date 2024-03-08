@@ -4,15 +4,15 @@
    - name: get user login
      ansible.builtin.set_fact:
         username1: "{{ lookup('cypher','secret=secret/ueqbal/test') }}"
-        username2: "{{ lookup('cypher','secret=secret/ueqbal') }}"             #triggers json failure
+  #      username2: "{{ lookup('cypher','secret=secret/ueqbal') }}"             #triggers json failure
         username3: "{{ lookup('cypher','secret=secret/ueqbal/') }}"
 
    - name: secret/ueqbal/test
      ansible.builtin.debug:
         var: username1
-   - name: secret/ueqbal
-     ansible.builtin.debug:
-        var: username2
+#   - name: secret/ueqbal
+#     ansible.builtin.debug:
+#        var: username2
    - name: secret/ueqbal/
      ansible.builtin.debug:
         var: username3
