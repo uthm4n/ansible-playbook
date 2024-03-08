@@ -5,4 +5,5 @@
      tasks:
       - name: Process JSON
         debug:
-        msg: "{{ lookup('cypher','secret=secret/jsontest') | to_json }}"
+          msg: 
+           - "This is the JSON processed: {{ lookup('cypher','secret=secret/jsontest') }}"
