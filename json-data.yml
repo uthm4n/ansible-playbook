@@ -6,8 +6,6 @@
   - name: Process JSON
     debug:
       msg: 'This is the JSON processed: "{{ badJSON }}"'
-    with_items:
-        -"{{ lookup('cypher','secret=secret/jsontestgoodjson') }}"
     register: jsonOutput
   
   - name: Debug Bad JSON
