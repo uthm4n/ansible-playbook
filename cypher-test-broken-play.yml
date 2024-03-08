@@ -1,0 +1,8 @@
+- name:  Retrieve JSON from Cypher
+  hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
+  gather_facts: false
+  tasks:
+     tasks:
+      - name: Process JSON
+        debug:
+          msg: "This is the JSON processed: " + "{{ lookup('cypher','secret=secret/jsontest') }}"
