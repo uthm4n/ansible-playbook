@@ -15,7 +15,7 @@
 
    - name: get user login
      ansible.builtin.set_fact:
-        username: "{{ lookup('cypher','secret=secret/user') }}"
+        username: "{{ lookup('cypher','secret=secret/ueqbal') }}"
  
    - name: Debug cypher lookup
      ansible.builtin.debug:
