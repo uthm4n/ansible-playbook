@@ -1,18 +1,6 @@
-- name:  API call test
+- name:  Lookup cypher test
   hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
-  vars:
-    instance_id: "{{ morpheus['instance']['id'] }}"
   tasks:
-   - name: Get instance information...
-     uri:
-        url: "{{ morpheus['morpheus']['applianceUrl'] }}api/instances/{{ instance_id }}"
-        method: GET
-        headers:
-          accept: application/json
-          Authorization: "Bearer {{ morpheus['morpheus']['apiAccessToken'] }}"
-        validate_certs: no
-     register: api_response
-
    - name: get user login
      ansible.builtin.set_fact:
         username: "{{ lookup('cypher','secret=secret/ueqbal') }}"
