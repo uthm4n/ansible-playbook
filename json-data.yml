@@ -5,9 +5,14 @@
   tasks:
   - name: Process JSON
     debug:
-      msg: 'This is the JSON processed: {{ json_data }}'
+      msg: 'This is the JSON data: {{ json_data }}'
+    register: jsonData
+  
+  - name: Process JSON
+    debug:
+      msg: 'This is the JSON processed: {{ json_data.json.colours }}'
     register: jsonOutput
   
   - name: Debug Bad JSON
     debug:
-      var: jsonOutput
+      var: json_data
