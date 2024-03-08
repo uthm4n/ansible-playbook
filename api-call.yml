@@ -1,17 +1,17 @@
 hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
-  vars: 
-    instance_id: "{{ morpheus['instance']['id'] }}"
+vars: 
+  instance_id: "{{ morpheus['instance']['id'] }}"
 tasks:
-- name: Make API request to get instance information
-      uri:
+     - name: Make API request to get instance information
+       uri:
         url: "{{ morpheus['morpheus']['applianceUrl'] }}api/instances/{{ instance_id }}"
         method: GET
         validate_certs: no
         headers:
           Authorization: "Bearer {{ morpheus['morpheus']['apiAccessToken'] }}"
-      register: api_response
-      delegate_to: localhost
+       register: api_response
+       delegate_to: localhost
 
-- name: Debug 
-      debug:
+     - name: Debug 
+       debug:
         var: api_response.json.instance
