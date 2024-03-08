@@ -3,15 +3,14 @@
   vars:
     instance_id: "{{ morpheus['instance']['id'] }}"
   tasks:
-   - name: Restart the instance...
+   - name: Get instance information...
      uri:
         url: "{{ morpheus['morpheus']['applianceUrl'] }}api/instances/{{ instance_id }}"
-        method: PUT
+        method: GET
         headers:
           accept: application/json
-          authorization: "Bearer {{ morpheus['morpheus']['apiAccessToken'] }}"
+          Authorization: "Bearer {{ morpheus['morpheus']['apiAccessToken'] }}"
         validate_certs: no
-        return_content: yes
      register: api_response
 
    - name: Debug
