@@ -5,7 +5,7 @@
   tasks:
   - name: Process JSON
     debug:
-      msg: 'This is the JSON processed: {{ json_data.json }}'
+      msg: 'This is the JSON processed: {{ json_data }}'
     register: jsonOutput
   
   - name: Debug Bad JSON
