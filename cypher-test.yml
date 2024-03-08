@@ -13,4 +13,4 @@
     register: badJSON
 
   - debug:
-      var: goodJSON
+      var: badJSON
