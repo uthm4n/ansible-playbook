@@ -1,6 +1,5 @@
 - hosts:
     - "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
-  gather_facts: true
   tasks:
       - name: Process JSON
         debug:
