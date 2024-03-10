@@ -16,3 +16,49 @@
    - name: secret/ueqbal/
      ansible.builtin.debug:
         var: username3
+
+
+# Assumption is that you have two Cypher Access Policies (https://docs.morpheusdata.com/en/latest/getting_started/guides/cypher_policies.html#cypher-access-policies) in place: 
+# Policy 1: 
+# {
+#   "policy": {
+#     "policyType": {
+#       "code": "cypher"
+#     },
+#     "config": {
+#       "keyPattern": ".*",
+#       "read": false,
+#       "write": false,
+#       "update": false,
+#       "delete": false,
+#       "list": false
+#     },
+#     "enabled": true,
+#     "refType": "Role",
+#     "refId": "<scoped-role-id-here>",
+#     "eachUser": false,
+#     "name": "Policy 1"
+#   }
+# }
+#
+# Policy 2: 
+# {
+#   "policy": {
+#     "policyType": {
+#       "code": "cypher"
+#     },
+#     "config": {
+#       "keyPattern": "secret/ueqbal/.*",
+#       "read": true,
+#       "write": false,
+#       "update": false,
+#       "delete": false,
+#       "list": true
+#     },
+#     "enabled": true,
+#     "refType": "Role",
+#     "refId": "<scoped-role-id-here>",
+#     "eachUser": false,
+#     "name": "Policy 2"
+#   }
+# }
