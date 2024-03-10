@@ -1,11 +1,11 @@
-- name:  Lookup cypher test
+- name:  Cypher lookup tests
   hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
   tasks:
    - name: get user login
      ansible.builtin.set_fact:
         username1: "{{ lookup('cypher','secret=secret/ueqbal/test') }}"
-  #      username2: "{{ lookup('cypher','secret=secret/ueqbal') }}"             #triggers json failure
-        username3: "{{ lookup('cypher','secret=secret/ueqbal/') }}"
+  #      username2: "{{ lookup('cypher','secret=secret/ueqbal') }}"             # "An unhandled exception occurred while running the lookup plugin 'cypher'. Error was a <class 'simplejson.errors.JSONDecodeError'>, original message: Expecting value: line 1 column 2 (char 1)"
+        username3: "{{ lookup('cypher','secret=secret/ueqbal/') }}"             # "An unhandled exception occurred while running the lookup plugin 'cypher'. Error was a <class 'ansible.errors.AnsibleError'>, original message: The secret secret/ueqbal/ doesn't seem to exist for cypher lookup"
 
    - name: secret/ueqbal/test
      ansible.builtin.debug:
