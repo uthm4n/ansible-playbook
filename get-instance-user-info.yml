@@ -18,7 +18,7 @@
         var: username3
 
 
-# Assumption is that you have two Cypher Access Policies (https://docs.morpheusdata.com/en/latest/getting_started/guides/cypher_policies.html#cypher-access-policies) in place: 
+# Assumption is that you have two Cypher Access Policies (https://docs.morpheusdata.com/en/latest/getting_started/guides/cypher_policies.html#cypher-access-policies) in place and Cypher:Full set on the User Role: 
 # Policy 1: 
 # {
 #   "policy": {
