@@ -6,7 +6,7 @@
       ansible.builtin.ping: null
     - name: Reboot the instance with the Ansible module...
       reboot:
-        post_reboot_delay: 180
+        post_reboot_delay: 300
         test_command: morpheus-node-ctl status
       register: rebooted
     - name: Debug info from previous task
