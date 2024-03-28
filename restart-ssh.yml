@@ -5,17 +5,16 @@
     - name: Test sshd configuration and restart
       command: sshd -t
       notify: [ 'Restart sshd' ]
-
-    - name: Restart sshd
-      service:
-         name: 'ssh'
-         state: 'restarted'
-         register: ssh-restarted
     - name: Debug info from previous task
       ansible.builtin.debug:
         var: ssh-restarted
         verbosity: 3
   handlers:
+    - name: Restart sshd
+      service:
+         name: 'ssh'
+         state: 'restarted'
+         register: ssh-restarted
     - name: Wait for server to come back online...
       local_action:
         module: wait_for 
