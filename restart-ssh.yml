@@ -2,12 +2,12 @@
 - hosts:
     - "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
   tasks:
-    - name: Test sshd configuration and restart
-      command: sshd -t
-      notify: [ 'restart ssh' ]
+  #  - name: Test sshd configuration and restart
+  #    command: sshd -t
+  #    notify: [ 'restart ssh' ]
     - name: Debug info from previous task
       ansible.builtin.debug:
-        var: ssh-restarted
+  #      var: ssh-restarted
         verbosity: 3
   handlers:
     - name: restart ssh
