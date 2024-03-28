@@ -10,11 +10,11 @@
         var: ssh-restarted
         verbosity: 3
   handlers:
-    - name: Restart sshd
+    - name: Restart ssh
       service:
-         name: 'sshd'
-         register:
-           state: 'restarted'
+        name: sshd
+        state: restarted
+      register: ssh-restarted
     - name: Wait for server to come back online...
       local_action:
         module: wait_for 
