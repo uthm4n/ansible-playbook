@@ -14,7 +14,6 @@
       service:
         name: ssh
         state: restarted
-      register: ssh-restarted
     - name: Wait for server to come back online...
       local_action:
         module: wait_for 
