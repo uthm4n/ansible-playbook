@@ -1,0 +1,28 @@
+---
+- name:  
+  hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
+  vars: 
+    vcenter_hostname: "{{ lookup('cypher','secret=secret/vcenter_host') }}"
+    vcenter_username: "{{ lookup('cypher','secret=secret/vcenter_username') }}"
+    vcenter_password: "{{ lookup('cypher','secret=secret/vcenter_password') }}"
+    datacenter_name: "labs-den-dc2-demo"
+    guest_name: "{{ morpheus['instance']['name'] }}"
+  tasks:
+  - name: Create a snapshot
+    community.vmware.vmware_guest_snapshot:
+      hostname: "{{ vcenter_hostname }}"
+      username: "{{ vcenter_username }}"
+      password: "{{ vcenter_password }}"
+      datacenter: "{{ datacenter_name }}"
+      folder: "/{{ datacenter_name }}/vm/"
+      name: "{{ guest_name }}"
+      state: present
+      snapshot_name: snap1
+      description: snapshot triggered from an Ansible playbook
+    delegate_to: localhost
+    register: snapshotResults
+  - name: Debug snapshot results
+    debug:
+      var: snapshotResults
+
+    
