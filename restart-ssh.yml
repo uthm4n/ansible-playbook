@@ -12,7 +12,7 @@
   handlers:
     - name: restart ssh
       service:
-        name: ssh
+        name: sshd
         state: restarted
  #   - name: Wait for server to come back online...
  #     local_action:
