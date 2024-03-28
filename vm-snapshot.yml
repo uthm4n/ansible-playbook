@@ -25,12 +25,12 @@
     debug:
       var: snapshotResults
   - name: Test sshd configuration and restart
-      command: sshd -t
-      notify: [ 'restart ssh' ]
-    - name: Debug info from previous task
-      ansible.builtin.debug:
-        var: ssh-restarted
-        verbosity: 3
+    command: sshd -t
+    notify: [ 'restart ssh' ]
+  - name: Debug info from previous task
+    ansible.builtin.debug:
+      var: ssh-restarted
+      verbosity: 3
   handlers:
     - name: restart ssh
       service:
