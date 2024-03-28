@@ -12,7 +12,7 @@
   handlers:
     - name: restart ssh
       service:
-        name: sshd
+        name: ssh
         state: restarted
       register: ssh-restarted
     - name: Wait for server to come back online...
