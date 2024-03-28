@@ -5,7 +5,7 @@
     vcenter_hostname: "{{ lookup('cypher','secret=secret/vcenter_host') }}"
     vcenter_username: "{{ lookup('cypher','secret=secret/vcenter_username') }}"
     vcenter_password: "{{ lookup('cypher','secret=secret/vcenter_password') }}"
-    datacenter_name: "labs-den-dc2-demo"
+    datacenter_name: "{{ lookup('cypher','secret=secret/vcenter_datacenter') }}"
     guest_name: "{{ morpheus['instance']['name'] }}"
   tasks:
   - name: Create a snapshot
