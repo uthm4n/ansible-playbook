@@ -14,10 +14,10 @@
       service:
         name: ssh
         state: restarted
-    - name: Wait for server to come back online...
-      local_action:
-        module: wait_for 
-          host={{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }} 
-          port=22 
-          delay=10
-        become: false
+ #   - name: Wait for server to come back online...
+ #     local_action:
+ #       module: wait_for 
+ #         host={{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }} 
+ #         port=22 
+ #         delay=10
+ #       become: false
