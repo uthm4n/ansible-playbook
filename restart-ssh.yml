@@ -4,7 +4,7 @@
   tasks:
     - name: Test sshd configuration and restart
       command: sshd -t
-      notify: [ 'restart sshd' ]
+      notify: [ 'restart ssh' ]
     - name: Debug info from previous task
       ansible.builtin.debug:
         var: ssh-restarted
