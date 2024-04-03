@@ -1,18 +1,13 @@
-- name: JSON Processor via Cypher
-  hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
+- name: Retrieve a Cypher using an Ansible playbook 
+  hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"          # generic to allow this playbook to be ran on a specific host
+                                                                                                      # constructed by concatenating the properties referenced e.g. uthman-test.local
   vars:
-    ansible_python_interpreter: /usr/bin/python3
-    goodJSON: "{{ lookup('cypher','secret=secret/jsontestgoodjson') }}"
-    badJSON: "{{ lookup('cypher','secret=secret/jsontest') }}"
+    ansible_python_interpreter: /usr/bin/python2
+    cypher_result: "{{ lookup('cypher','secret=secret/test') }}"
   tasks:
-  - name: Good JSON
+  - name: Cypher response JSON
     debug:
-      msg: "Good JSON is {{ goodJSON }}"
-    register: goodJSONOutput
-  - name: Bad JSON
-    debug:
-      msg: "Bad JSON is {{ badJSON }}"
-    register: badJSONOutput
-
+      msg: "Cypher result is {{ cypher_result }}"
+    register: cypherResult
   - debug:
-      var: badJSONOutput
+      var: cypherResult
