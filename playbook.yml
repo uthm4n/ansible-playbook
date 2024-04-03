@@ -1,5 +1,5 @@
 - name: My first play
-  hosts: uthman-test-1.localdomain
+  hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
   tasks:
    - name: Ping my hosts
      ansible.builtin.ping:
