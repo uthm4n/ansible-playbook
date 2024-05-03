@@ -1,0 +1,5 @@
+- hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
+  tasks:
+  - name: Task 2
+    debug:
+      msg: "[ELSE WORKFLOW RAN]"
