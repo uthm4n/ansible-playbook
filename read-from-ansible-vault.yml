@@ -12,19 +12,19 @@
     cypher_lookup: "{{ lookup('cypher','secret=secret/vault-pass') }}"
     print_customOptions: "{{ morpheus['customOptions'] }}"
   tasks:   
-    - name: [1] Decode vault_test
+    - name: '[1] Decode vault_test'
       debug:
         var: vault_test
-    - name: [2][DEBUG] CYPHER 1
+    - name: '[2][DEBUG] CYPHER 1'
       debug:
         var: cypher_1
-    - name: [3][DEBUG] CYPHER PATH
+    - name: '[3][DEBUG] CYPHER PATH'
       debug:
         var: cypher_path
-    - name: [4][DEBUG] CYPHER LOOKUP
+    - name: '[4][DEBUG] CYPHER LOOKUP'
       debug:
         var: cypher_lookup
-    - name: [5][DEBUG] PRINT CUSTOM OPTIONS
+    - name: '[5][DEBUG] PRINT CUSTOM OPTIONS'
       debug:
         var: print_customOptions
         
