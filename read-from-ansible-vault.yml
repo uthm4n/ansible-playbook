@@ -7,7 +7,24 @@
           36303134386465613462373362316432356136396166653363353738616432653339396237373333
           3837306161316366660a323436626530613432636539333235623462646664323962303763363033
           3236
+    cypher_1: {{ morpheus['cypher']['read']['secret=secret/vault-pass'] }}
+    cypher_path: {{ morpheus['cypher']['read']['secret/vault-pass'] }}
+    cypher_lookup: {{ lookup('cypher','secret=secret/vault-pass') }}
+    print_customOptions: {{ morpheus['customOptions'] }}
   tasks:   
-    - name: Retrieve vault data
+    - name: [1] Decode vault_test
       debug:
         var: vault_test
+    - name: [2][DEBUG] CYPHER 1
+      debug:
+        var: cypher_1
+    - name: [3][DEBUG] CYPHER PATH
+      debug:
+        var: cypher_path
+    - name: [4][DEBUG] CYPHER LOOKUP
+      debug:
+        var: cypher_lookup
+    - name: [5][DEBUG] PRINT CUSTOM OPTIONS
+      debug:
+        var: print_customOptions
+        
