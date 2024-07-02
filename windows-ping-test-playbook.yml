@@ -1,18 +1,17 @@
-- hosts:
-    - "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
+- hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
   vars:
     print_morpheus_user: "{{ morpheus['user'] }}"
   tasks:
-    - name: '[1] ping windows host'
-      win_ping:
-    register: win_ping_value
+    - name: '[1] ping localhost'
+      ping:
+      register: ping_result
 
-    - name: '[2] win_ping_value'
-      ansible.builtin.debug:
-        var: win_ping_value
+    - name: '[2] ping_result'
+      debug:
+        var: ping_result
         verbosity: 3
 
     - name: '[3] morpheus user'
-      ansible.builtin.debug:
+      debug:
         var: print_morpheus_user
         verbosity: 3
