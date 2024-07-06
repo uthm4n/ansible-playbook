@@ -1,6 +1,6 @@
 ---
 - name: Extract and format application.yml data - retrieving the dataSource
-  hosts: "{{ morpheus['applianceHost']"
+  hosts: "{{ morpheus['applianceHost'] }}"
   become: true      
 
   tasks:
