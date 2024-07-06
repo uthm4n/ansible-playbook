@@ -1,0 +1,15 @@
+---
+- name: Extract and format application.yml data - retrieving the dataSource
+  hosts: "{{ morpheus['applianceHost']"
+  become: true      
+
+  tasks:
+    - name: Read and format dataSource using yq
+      ansible.builtin.shell: |
+        sudo su morpheus-app -s /bin/cat /opt/morpheus/conf/application.yml | yq -j '{"dataSource": [{"url": .environments.production.dataSource.url, "username": .environments.production.dataSource.username, "password": .environments.production.dataSource.password, "driver": .environments.production.dataSource.driverClassName}]}'
+      register: datasource_output
+      changed_when: false  
+
+    - name: Debug datasource
+      ansible.builtin.debug:
+        var: datasource_output.stdout
