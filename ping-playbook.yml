@@ -1,8 +1,14 @@
 ---
-- hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}" 
-  tasks:   
+- hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
+  debugger: always
+  tasks:
     - name: Ping test
       ansible.builtin.ping:
+      register: PING_RESULT
+
+    - name: Show Ping Result
+      debug:
+        var: PING_RESULT
 
     - name: Continuing
       debug:
