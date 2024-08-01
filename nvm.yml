@@ -1,11 +1,12 @@
 ---
 - name: Install nvm
   hosts: ueqbal-linux.infoblox.den.morpheusdata.com
-  become: yes
+  become: true  
   become_user: ueqbal
   become_method: su
   vars:
     ansible_python_interpreter: /usr/bin/python3
+
   tasks:
     - name: [DEBIAN] INSTALL pip
       apt:
@@ -30,7 +31,7 @@
         name: python3-six
         state: present
       when: ansible_os_family == "RedHat"
-      
+
     - name: CHECK CURRENT USER
       command: whoami
       register: current_user
@@ -40,10 +41,7 @@
         msg: "Current user is {{ current_user.stdout }}"
 
     - name: DOWNLOAD AND INSTALL NVM
-      shell: |
-        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-      args:
-        executable: /bin/bash
+      command: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
       register: nvm_install_result
 
     - name: [DEBUG] NVM_INSTALL_RESULT
@@ -51,10 +49,7 @@
         msg: "NVM installation result: {{ nvm_install_result.stdout }}"
 
     - name: VERIFY NVM INSTALL
-      shell: |
-        . ~/.nvm/nvm.sh && nvm --version
-      args:
-        executable: /bin/bash
+      command: ". ~/.nvm/nvm.sh && nvm --version"
       register: nvm_version
 
     - name: [DEBUG] NVM_VERSION
