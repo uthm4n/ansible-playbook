@@ -35,8 +35,8 @@
 #        ansible_become_method: su
 #        ansible_python_interpreter: /usr/bin/python3
 
-- name: Use FQDN as hosts value and install nvm
-  hosts: dynamic_host
+- name: Install nvm
+  hosts: all
   become: yes
   become_user: ueqbal
   become_method: su
