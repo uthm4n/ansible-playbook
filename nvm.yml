@@ -1,6 +1,26 @@
 ---
-- name: Install nvm for a specific user
-  hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
+- name: Construct and use FQDN as hosts
+  hosts: localhost
+  gather_facts: yes
+  tasks:
+    - name: Gather hostname
+      command: hostname
+      register: hostname_result
+
+    - name: Gather dnsdomainname
+      command: dnsdomainname
+      register: dnsdomainname_result
+
+    - name: Set FQDN fact
+      set_fact:
+        fqdn: "{{ hostname_result.stdout }}.{{ dnsdomainname_result.stdout }}"
+
+    - name: Debug FQDN
+      debug:
+        msg: "FQDN is {{ fqdn }}"
+
+- name: Use FQDN as hosts value and install nvm
+  hosts: "{{ fqdn }}"
   become: yes
   become_user: ueqbal
   become_method: su
