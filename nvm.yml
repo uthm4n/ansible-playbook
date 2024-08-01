@@ -60,7 +60,9 @@
       register: chmod_nvm_result
       
     - name: VERIFY NVM INSTALL
-      command: "~/.nvm/nvm.sh && nvm --version"
+      shell: ~/.nvm/nvm.sh && nvm --version
+      args:
+        executable: /bin/bash
       register: nvm_version
 
     - name: DEBUG | NVM_VERSION
