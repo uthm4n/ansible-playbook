@@ -56,7 +56,7 @@
         msg: "NVM installation result: {{ nvm_install_result.stdout }}"
 
     - name: VERIFY NVM INSTALL
-      command: ". ~/.nvm/nvm.sh && nvm --version"
+      command: "~/.nvm/nvm.sh && nvm --version"
       register: nvm_version
 
     - name: DEBUG | NVM_VERSION
