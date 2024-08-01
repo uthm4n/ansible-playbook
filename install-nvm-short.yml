@@ -6,39 +6,19 @@
   become_method: su
   vars:
     ansible_python_interpreter: /usr/bin/python3
-
   tasks:
-    - name: DEBIAN | INSTALL pip
-      apt:
-        name: python3-pip
+    - name: INSTALL pip AND six BASED ON OS
+      package:
+        name: "{{ item }}"
         state: present
       become: true
       become_user: root
-      when: ansible_os_family == "Debian"
-
-    - name: REDHAT | INSTALL pip
-      yum:
-        name: python3-pip
-        state: present
-      become: true
-      become_user: root
-      when: ansible_os_family == "RedHat"
-
-    - name: DEBIAN | INSTALL six MODULE 
-      apt:
-        name: python3-six
-        state: present
-      become: true
-      become_user: root
-      when: ansible_os_family == "Debian"
-
-    - name: REDHAT | INSTALL six MODULE 
-      yum:
-        name: python3-six
-        state: present
-      become: true
-      become_user: root
-      when: ansible_os_family == "RedHat"
+      with_items:
+        - "{{ ansible_os_family == 'Debian' and 'python3-pip' or '' }}"
+        - "{{ ansible_os_family == 'Debian' and 'python3-six' or '' }}"
+        - "{{ ansible_os_family == 'RedHat' and 'python3-pip' or '' }}"
+        - "{{ ansible_os_family == 'RedHat' and 'python3-six' or '' }}"
+      when: item != ''
 
     - name: Check current user
       command: whoami
