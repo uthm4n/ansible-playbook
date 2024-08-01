@@ -8,25 +8,25 @@
     ansible_python_interpreter: /usr/bin/python3
 
   tasks:
-    - name: [DEBIAN] INSTALL pip
+    - name: DEBIAN | INSTALL pip
       apt:
         name: python3-pip
         state: present
       when: ansible_os_family == "Debian"
 
-    - name: [REDHAT] INSTALL pip
+    - name: REDHAT | INSTALL pip
       yum:
         name: python3-pip
         state: present
       when: ansible_os_family == "RedHat"
 
-    - name: [DEBIAN] INSTALL six MODULE 
+    - name: DEBIAN | INSTALL six MODULE 
       apt:
         name: python3-six
         state: present
       when: ansible_os_family == "Debian"
 
-    - name: [REDHAT] INSTALL six MODULE 
+    - name: REDHAT | INSTALL six MODULE 
       yum:
         name: python3-six
         state: present
@@ -36,7 +36,7 @@
       command: whoami
       register: current_user
 
-    - name: [DEBUG] CURRENT USER
+    - name: DEBUG | CURRENT USER
       debug:
         msg: "Current user is {{ current_user.stdout }}"
 
@@ -44,7 +44,7 @@
       command: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
       register: nvm_install_result
 
-    - name: [DEBUG] NVM_INSTALL_RESULT
+    - name: DEBUG | NVM_INSTALL_RESULT
       debug:
         msg: "NVM installation result: {{ nvm_install_result.stdout }}"
 
@@ -52,6 +52,6 @@
       command: ". ~/.nvm/nvm.sh && nvm --version"
       register: nvm_version
 
-    - name: [DEBUG] NVM_VERSION
+    - name: DEBUG | NVM_VERSION
       debug:
         msg: "NVM version installed: {{ nvm_version.stdout }}"
