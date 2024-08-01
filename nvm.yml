@@ -88,7 +88,7 @@
         cmd: "chmod +x ~/.nvm/nvm.sh"
         result: "{{ chmod_nvm_result.stdout }}"
       nvm_sh_permissions_result:
-        cmd: "stat -c "%a" ~/.nvm/nvm.sh"
+        cmd: "stat -c \"%a\" ~/.nvm/nvm.sh"
         result: "{{ nvm_sh_permissions_result.stdout }}"
       nvm_version:
         cmd: "~/.nvm/nvm.sh && nvm --version"
