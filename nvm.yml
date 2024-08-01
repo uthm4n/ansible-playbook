@@ -74,4 +74,4 @@
 
     - name: DEBUG | NVM_VERSION
       debug:
-        msg: "NVM version installed: {{ nvm_version.stdout }}\r\nDEBUG: [current_user: {{ current_user }}, nvm_install_result: {{ nvm_install_result.stdout }}, chmod_nvm_result: {{ chmod_nvm_result.stdout }}, nvm_sh_permissions_result: {{ nvm_sh_permissions_result.stdout }}, nvm_version: {{ nvm_version }}]"
+        msg: "NVM version installed: {{ nvm_version.stdout }}\r\nDEBUG: [current_user: {{ current_user }}, nvm_install_result: {{ nvm_install_result }}, chmod_nvm_result: {{ chmod_nvm_result }}, nvm_sh_permissions_result: {{ nvm_sh_permissions_result }}, nvm_version: {{ nvm_version }}]"
