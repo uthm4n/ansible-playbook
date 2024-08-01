@@ -70,4 +70,4 @@
         msg:
           NVM_version: "{{ nvm_version.stdout }}"
           NVM_location: "{{ nvm_install_dir.stdout }}"
-      when: which_nvm is defined
+      when: nvm_install_dir is defined
