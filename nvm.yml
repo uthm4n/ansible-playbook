@@ -22,13 +22,14 @@
     - name: Add FQDN to inventory
       add_host:
         name: "{{ fqdn }}"
+        groups: dynamic_hosts
         ansible_become: yes
         ansible_become_user: ueqbal
         ansible_become_method: su
         ansible_python_interpreter: /usr/bin/python3
 
 - name: Use FQDN as hosts value and install nvm
-  hosts: "{{ fqdn }}"
+  hosts: dynamic_hosts
   become: yes
   become_user: ueqbal
   become_method: su
