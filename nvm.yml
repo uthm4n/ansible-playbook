@@ -70,8 +70,8 @@
     - name: VERIFY NVM INSTALL
       shell: ~/.nvm/nvm.sh && nvm --version
       register: nvm_version
-      when: nvm_sh_permissions_result == 775
+      when: nvm_sh_permissions_result == "775"
 
     - name: DEBUG | NVM_VERSION
       debug:
-        msg: "NVM version installed: {{ nvm_version.stdout }}\r\nDEBUG: [current_user: {{ current_user }}, nvm_install_result: {{ nvm_install_result }}, chmod_nvm_result: {{ chmod_nvm_result }}, nvm_sh_permissions_result: {{ nvm_sh_permissions_result }}, nvm_version: {{ nvm_version }}]"
+        msg: "NVM version installed: {{ nvm_version }}\r\nDEBUG: [current_user: {{ current_user }}, nvm_install_result: {{ nvm_install_result }}, chmod_nvm_result: {{ chmod_nvm_result }}, nvm_sh_permissions_result: {{ nvm_sh_permissions_result }}, nvm_version: {{ nvm_version }}]"
