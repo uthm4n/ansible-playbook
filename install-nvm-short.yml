@@ -1,0 +1,65 @@
+---
+- name: Install nvm
+  hosts: ueqbal-linux.infoblox.den.morpheusdata.com
+  become: true  
+  become_user: ueqbal
+  become_method: su
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+    - name: Ensure pip and six module are installed (Debian)
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - python3-pip
+        - python3-six
+      when: ansible_os_family == "Debian"
+
+    - name: Ensure pip and six module are installed (RedHat)
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - python3-pip
+        - python3-six
+      when: ansible_os_family == "RedHat"
+
+    - name: Check current user
+      command: whoami
+      register: current_user
+
+    - name: Download and install nvm
+      become: false
+      shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+      args:
+        executable: /bin/bash
+      register: nvm_install_result
+      environment:
+        HOME: "{{ ansible_env.HOME }}"
+
+    - name: Set executable permissions on nvm.sh
+      file:
+        path: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+        mode: '0755'
+      become: false
+
+    - name: Check permissions on nvm.sh
+      stat:
+        path: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+      register: nvm_sh_permissions
+
+    - name: Verify NVM install
+      shell: . "{{ ansible_env.HOME }}/.nvm/nvm.sh" && nvm --version
+      register: nvm_version
+      become: false
+      when: nvm_sh_permissions.stat.exists
+
+    - name: Debug NVM installation result
+      debug:
+        msg: "NVM installation result: {{ nvm_install_result.stdout }}"
+
+    - name: Debug NVM version
+      debug:
+        msg: "NVM version: {{ nvm_version.stdout }}"
+      when: nvm_version is defined
