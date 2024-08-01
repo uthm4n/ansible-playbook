@@ -18,6 +18,15 @@
     - name: Debug FQDN
       debug:
         msg: "FQDN is {{ fqdn }}"
+        
+    - name: Add FQDN to inventory
+      add_host:
+        name: "{{ fqdn }}"
+        ansible_user: "{{ ansible_user }}"
+        ansible_become: yes
+        ansible_become_user: ueqbal
+        ansible_become_method: su
+        ansible_python_interpreter: /usr/bin/python3
 
 - name: Use FQDN as hosts value and install nvm
   hosts: "{{ fqdn }}"
