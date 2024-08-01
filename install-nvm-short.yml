@@ -7,23 +7,18 @@
   vars:
     ansible_python_interpreter: /usr/bin/python3
   tasks:
-    - name: Ensure pip and six module are installed (Debian)
-      apt:
+    - name: INSTALL pip AND six BASED ON OS
+      package:
         name: "{{ item }}"
         state: present
-      loop:
-        - python3-pip
-        - python3-six
-      when: ansible_os_family == "Debian"
-
-    - name: Ensure pip and six module are installed (RedHat)
-      yum:
-        name: "{{ item }}"
-        state: present
-      loop:
-        - python3-pip
-        - python3-six
-      when: ansible_os_family == "RedHat"
+      become: true
+      become_user: root
+      with_items:
+        - "{{ ansible_os_family == 'Debian' and 'python3-pip' or '' }}"
+        - "{{ ansible_os_family == 'Debian' and 'python3-six' or '' }}"
+        - "{{ ansible_os_family == 'RedHat' and 'python3-pip' or '' }}"
+        - "{{ ansible_os_family == 'RedHat' and 'python3-six' or '' }}"
+      when: item != ''
 
     - name: Check current user
       command: whoami
