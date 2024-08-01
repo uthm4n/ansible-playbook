@@ -1,6 +1,7 @@
 ---
 - name: Install nvm for a specific user
-  hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
+  hosts: all 
+  # "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
   become: yes
   become_user: ueqbal
   become_method: su
