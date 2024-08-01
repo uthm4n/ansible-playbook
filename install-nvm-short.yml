@@ -55,9 +55,9 @@
       become: false
       when: nvm_sh_permissions.stat.exists
 
-    - name: Check which nvm
-      shell: which nvm
-      register: which_nvm
+    - name: Check NVM install directory
+      shell: echo $NVM_DIR
+      register: nvm_install_dir
       become: false
       when: nvm_version is defined
 
@@ -69,5 +69,5 @@
       debug:
         msg:
           NVM_version: "{{ nvm_version.stdout }}"
-          NVM_location: "{{ which_nvm.stdout }}"
+          NVM_location: "{{ nvm_install_dir.stdout }}"
       when: which_nvm is defined
