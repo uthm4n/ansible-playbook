@@ -55,11 +55,19 @@
       become: false
       when: nvm_sh_permissions.stat.exists
 
+    - name: Check which nvm
+      shell: which nvm
+      register: which_nvm
+      become: false
+      when: nvm_version is defined
+
     - name: Debug NVM installation result
       debug:
         msg: "NVM installation result: {{ nvm_install_result.stdout }}"
 
-    - name: Debug NVM version
+    - name: Debug NVM version and location
       debug:
-        msg: "NVM version: {{ nvm_version.stdout }}"
-      when: nvm_version is defined
+        msg:
+          NVM_version: "{{ nvm_version.stdout }}"
+          NVM_location: "{{ which_nvm.stdout }}"
+      when: which_nvm is defined
