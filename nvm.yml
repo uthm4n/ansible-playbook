@@ -60,7 +60,7 @@
       register: chmod_nvm_result
       
     - name: VERIFY NVM INSTALL
-      command: "/home/`whoami`/.nvm/nvm.sh && nvm --version"
+      command: "~/.nvm/nvm.sh && nvm --version"
       register: nvm_version
 
     - name: DEBUG | NVM_VERSION
