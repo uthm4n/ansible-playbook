@@ -55,8 +55,12 @@
       debug:
         msg: "NVM installation result: {{ nvm_install_result.stdout }}"
 
+    - name: SET EXECUTABLE PERMISSIONS ON nvm.sh 
+      command: "chmod +x ~/.nvm/nvm.sh"
+      register: chmod_nvm_result
+      
     - name: VERIFY NVM INSTALL
-      command: "chmod +x ~/.nvm/nvm.sh && ~/.nvm/nvm.sh && nvm --version"
+      command: "~/.nvm/nvm.sh && nvm --version"
       register: nvm_version
 
     - name: DEBUG | NVM_VERSION
