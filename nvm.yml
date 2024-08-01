@@ -1,6 +1,6 @@
 ---
 - name: Install nvm
-  hosts: all
+  hosts: ueqbal-linux.infoblox.den.morpheusdata.com
   become: yes
   become_user: ueqbal
   become_method: su
