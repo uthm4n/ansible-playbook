@@ -56,7 +56,7 @@
       when: nvm_sh_permissions.stat.exists
 
     - name: Check NVM install directory
-      command: echo $NVM_DIR
+      command: "echo $NVM_DIR"
       register: nvm_install_dir
       become: false
       when: nvm_version is defined
