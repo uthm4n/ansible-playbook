@@ -19,22 +19,12 @@
         state: present
       when: ansible_os_family == "RedHat"
 
-    - name: Ensure setfacl is installed on Debian
-      apt:
-        name: acl
-        state: present
-      when: ansible_os_family == "Debian"
-
-    - name: Ensure setfacl is installed on RedHat
-      yum:
-        name: acl
-        state: present
-      when: ansible_os_family == "RedHat"
-
-    - name: Install the six module using pip
+    - name: Install the six module using pip for Ansible
       pip:
         name: six
         executable: pip3
+      environment:
+        PYTHONPATH: "{{ ansible_python_interpreter }}"
         
     - name: Check current user
       command: whoami
