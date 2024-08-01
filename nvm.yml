@@ -72,6 +72,24 @@
       register: nvm_version
       when: nvm_sh_permissions_result == "775"
 
-    - name: DEBUG | NVM_VERSION
+        - name: DEBUG | NVM_VERSION
       debug:
-        msg: "NVM version installed: {{ nvm_version }}\r\nDEBUG: [current_user: {{ current_user }}, nvm_install_result: {{ nvm_install_result }}, chmod_nvm_result: {{ chmod_nvm_result }}, nvm_sh_permissions_result: {{ nvm_sh_permissions_result }}, nvm_version: {{ nvm_version }}]"
+        msg: "{{ debug_output | to_json }}"
+
+  vars:
+    debug_output:
+      current_user: 
+        cmd: "whoami"
+        result: "{{ current_user.stdout }}"
+      nvm_install_result:
+        cmd: "{{ nvm_install_result.cmd }}"
+        result: "{{ nvm_install_result.stdout }}"
+      chmod_nvm_result:
+        cmd: "{{ chmod_nvm_result.cmd }}"
+        result: "{{ chmod_nvm_result.stdout }}"
+      nvm_sh_permissions_result:
+        cmd: "{{ nvm_sh_permissions_result.cmd }}"
+        result: "{{ nvm_sh_permissions_result.stdout }}"
+      nvm_version:
+        cmd: "{{ nvm_version.cmd }}"
+        result: "{{ nvm_version.stdout }}"
