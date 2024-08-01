@@ -1,6 +1,6 @@
 ---
 - name: Install nvm
-  hosts: ueqbal-linux.infoblox.den.morpheusdata.com
+  hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
   become: true  
   become_user: ueqbal
   become_method: su
