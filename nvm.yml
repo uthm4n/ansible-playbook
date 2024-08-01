@@ -60,14 +60,13 @@
       register: chmod_nvm_result
     
     - name: CHECK PERMISSIONS ON nvm.sh 
-      command: "ls -al ~/.nvm/nvm.sh"
+      command: "stat -c "%a" ~/.nvm/nvm.sh"
       register: nvm_sh_permissions_result
       
     - name: VERIFY NVM INSTALL
       shell: ~/.nvm/nvm.sh && nvm --version
-      args:
-        executable: /bin/bash
       register: nvm_version
+      when: nvm_sh_permissions_result == 775
 
     - name: DEBUG | NVM_VERSION
       debug:
