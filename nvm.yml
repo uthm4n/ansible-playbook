@@ -12,6 +12,7 @@
       apt:
         name: python3-pip
         state: present
+      become: true
       become_user: root
       when: ansible_os_family == "Debian"
 
@@ -19,6 +20,7 @@
       yum:
         name: python3-pip
         state: present
+      become: true
       become_user: root
       when: ansible_os_family == "RedHat"
 
@@ -26,6 +28,7 @@
       apt:
         name: python3-six
         state: present
+      become: true
       become_user: root
       when: ansible_os_family == "Debian"
 
@@ -33,6 +36,7 @@
       yum:
         name: python3-six
         state: present
+      become: true
       become_user: root
       when: ansible_os_family == "RedHat"
 
@@ -60,7 +64,7 @@
       register: chmod_nvm_result
     
     - name: CHECK PERMISSIONS ON nvm.sh 
-      command: "stat -c "%a" ~/.nvm/nvm.sh"
+      command: 'stat -c "%a" ~/.nvm/nvm.sh'
       register: nvm_sh_permissions_result
       
     - name: VERIFY NVM INSTALL
