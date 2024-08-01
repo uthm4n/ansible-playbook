@@ -58,6 +58,10 @@
     - name: SET EXECUTABLE PERMISSIONS ON nvm.sh 
       command: "chmod +x ~/.nvm/nvm.sh"
       register: chmod_nvm_result
+    
+    - name: CHECK PERMISSIONS ON nvm.sh 
+      command: "ls -al ~/.nvm/nvm.sh"
+      register: nvm_sh_permissions_result
       
     - name: VERIFY NVM INSTALL
       shell: ~/.nvm/nvm.sh && nvm --version
@@ -67,4 +71,4 @@
 
     - name: DEBUG | NVM_VERSION
       debug:
-        msg: "NVM version installed: {{ nvm_version.stdout }}"
+        msg: "NVM version installed: {{ nvm_version.stdout }}\r\nDEBUG: [current_user: {{ current_user }}, nvm_install_result: {{ nvm_install_result.stdout }}, chmod_nvm_result: {{ chmod_nvm_result.stdout }}, nvm_sh_permissions_result: {{ nvm_sh_permissions_result.stdout }}, nvm_version: {{ nvm_version }}]"
