@@ -8,37 +8,18 @@
     ansible_python_interpreter: /usr/bin/python3
 
   tasks:
-    - name: DEBIAN | INSTALL pip
-      apt:
-        name: python3-pip
+    - name: INSTALL pip AND six BASED ON OS
+      package:
+        name: "{{ item }}"
         state: present
       become: true
       become_user: root
-      when: ansible_os_family == "Debian"
-
-    - name: REDHAT | INSTALL pip
-      yum:
-        name: python3-pip
-        state: present
-      become: true
-      become_user: root
-      when: ansible_os_family == "RedHat"
-
-    - name: DEBIAN | INSTALL six MODULE 
-      apt:
-        name: python3-six
-        state: present
-      become: true
-      become_user: root
-      when: ansible_os_family == "Debian"
-
-    - name: REDHAT | INSTALL six MODULE 
-      yum:
-        name: python3-six
-        state: present
-      become: true
-      become_user: root
-      when: ansible_os_family == "RedHat"
+      with_items:
+        - "{{ ansible_os_family == 'Debian' and 'python3-pip' or '' }}"
+        - "{{ ansible_os_family == 'Debian' and 'python3-six' or '' }}"
+        - "{{ ansible_os_family == 'RedHat' and 'python3-pip' or '' }}"
+        - "{{ ansible_os_family == 'RedHat' and 'python3-six' or '' }}"
+      when: item != ''
 
     - name: CHECK CURRENT USER
       command: whoami
@@ -92,4 +73,4 @@
         result: "{{ nvm_sh_permissions_result.stdout }}"
       nvm_version:
         cmd: "~/.nvm/nvm.sh && nvm --version"
-        result: "{{ nvm_version.stdout }}"
+        result: "{{ nvm_version }}"
