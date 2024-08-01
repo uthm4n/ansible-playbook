@@ -72,7 +72,7 @@
       register: nvm_version
       when: nvm_sh_permissions_result == "775"
 
-        - name: DEBUG | NVM_VERSION
+    - name: DEBUG | NVM_VERSION
       debug:
         msg: "{{ debug_output | to_json }}"
 
