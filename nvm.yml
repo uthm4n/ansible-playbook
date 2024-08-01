@@ -82,14 +82,14 @@
         cmd: "whoami"
         result: "{{ current_user.stdout }}"
       nvm_install_result:
-        cmd: "{{ nvm_install_result.cmd }}"
+        cmd: "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash"
         result: "{{ nvm_install_result.stdout }}"
       chmod_nvm_result:
-        cmd: "{{ chmod_nvm_result.cmd }}"
+        cmd: "chmod +x ~/.nvm/nvm.sh"
         result: "{{ chmod_nvm_result.stdout }}"
       nvm_sh_permissions_result:
-        cmd: "{{ nvm_sh_permissions_result.cmd }}"
+        cmd: "stat -c "%a" ~/.nvm/nvm.sh"
         result: "{{ nvm_sh_permissions_result.stdout }}"
       nvm_version:
-        cmd: "{{ nvm_version.cmd }}"
+        cmd: "~/.nvm/nvm.sh && nvm --version"
         result: "{{ nvm_version.stdout }}"
