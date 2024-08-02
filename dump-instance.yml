@@ -1,0 +1,23 @@
+---
+- name: Print JSON-unescaped variable
+  hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
+  gather_facts: true
+  vars:
+    instance: "{{ morpheus['instance'] }}"
+  tasks:
+    - name: Print instance
+      debug:
+        msg: "{{ instance }}"
+      register: instance_variable_result
+
+    - name: Prettify and JSON-unescape
+      debug:
+        msg: "{{ instance | to_nice_json }}"
+      register: instance_pretty_result
+
+    - name: DEBUG INFORMATION
+      debug:
+        msg:
+          - "Instance Variable: {{ instance_variable_result }}"
+          - "Prettified JSON Result: {{ instance_pretty_result }}"
+          - "Prettified JSON Content: {{ instance_pretty_result.msg }}"
