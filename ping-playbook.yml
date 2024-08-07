@@ -1,5 +1,5 @@
 ---
-- hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
+- hosts: "{{ morpheus['instance']['containerDetails'][0]['externalFqdn'] }}"
   debugger: always
   tasks:
     - name: Ping test
