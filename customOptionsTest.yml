@@ -28,4 +28,5 @@
           - "Instance Variable: {{ instanceVariable }}"
           - "Instance Custom Options: {{ instanceCustomOptions }}"
           - "Decision: {{ decisionResult }}"
-## OUTPUT IN COMMIT # 
+
+## OUTPUT IN COMMIT https://github.com/uthm4n/ansible-playbook/commit/82f1b7ab2837a59ca412a92c10cfaed647a23b98 
