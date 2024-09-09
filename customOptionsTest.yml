@@ -1,6 +1,6 @@
 ---
 - name: Allow an instance to consume customOptions
-  hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
+  hosts: "{{ morpheus['instance']['name'] + '.' + morpheus['instance']['domainName'] }}"
   gather_facts: true
   vars:
     instance: "{{ morpheus['instance'] }}"
