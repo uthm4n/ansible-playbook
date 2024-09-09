@@ -3,6 +3,7 @@
   hosts: "{{ morpheus['instance']['name'] + '.' + morpheus['instance']['domainName'] }}"
   gather_facts: true
   vars:
+    ansible_python_interpreter: /usr/bin/python3
     instance: "{{ morpheus['instance'] }}"
     decision: "{{ morpheus['customOptions']['decision'] }}"                               # SELECT input with OptionList: [{name: "Yes", value: true}, {name: "No", value: false}]
   tasks:
