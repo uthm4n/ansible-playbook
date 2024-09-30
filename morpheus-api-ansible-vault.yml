@@ -1,0 +1,23 @@
+---
+- name: "Fetch Morpheus API Token and Call /api/whoami"
+  hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
+  gather_facts: no
+  vars:
+    morpheus_url: " {{ morpheus['applianceUrl'] }}"
+  vars_files:
+    - /opt/morpheus/.local/morpheus_api_credentials.yml  
+  tasks:
+    - name: "Call Morpheus /api/whoami to verify token"
+      ansible.builtin.uri:
+        url: "https://{{ morpheus_url }}/api/whoami"
+        method: GET
+        headers:
+          Content-Type: "application/json"
+          Authorization: "Bearer {{ api_token }}"
+        validate_certs: false 
+        return_content: true
+      register: whoami_response
+
+    - name: "Display /api/whoami response"
+      debug:
+        var: whoami_response.json
