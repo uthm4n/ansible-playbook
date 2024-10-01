@@ -1,13 +1,22 @@
 ---
-- name: "Fetch Morpheus API Token and Call /api/whoami"
+- name: "Fetch Morpheus API Token from Ansible Vault and Call /api/whoami"
   hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
   gather_facts: yes
   vars:
     morpheus_url: "ueqbal-morph-appliance.localdomain"
+    ansible_python_interpreter: /usr/bin/python3
   vars_files:
     - /opt/morpheus/.local/morpheus_api_credentials.yml  
   tasks:
-    - name: "Call Morpheus /api/whoami to verify token"
+    - name: "[1] - [Task] - Simple Google GET"
+      ansible.builtin.uri:
+        url: "https://www.google.co.uk"
+        method: GET
+        validate_certs: false 
+        return_content: true
+      register: google_response
+      
+    - name: "[2] - [Task] - Call Morpheus /api/whoami to verify token"
       ansible.builtin.uri:
         url: "https://{{ morpheus_url }}/api/whoami"
         method: GET
@@ -18,6 +27,11 @@
         return_content: true
       register: whoami_response
 
-    - name: "Display /api/whoami response"
+    - name: "[1] - [DEBUG] - Check Google GET response"
       debug:
-        var: whoami_response.json
+        var: google_response
+        
+    - name: "[2] - [DEBUG] - Display /api/whoami response"
+      debug:
+        var: whoami_response
+    
