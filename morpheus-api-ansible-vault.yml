@@ -1,7 +1,7 @@
 ---
 - name: "Fetch Morpheus API Token and Call /api/whoami"
   hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
-  gather_facts: no
+  gather_facts: yes
   vars:
     morpheus_url: "ueqbal-morph-appliance.localdomain"
   vars_files:
