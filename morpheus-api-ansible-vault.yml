@@ -2,12 +2,18 @@
 - name: "Fetch Morpheus API Token from Ansible Vault and Call /api/whoami"
   hosts: "{{ morpheus['instance']['hostname'] + '.' + morpheus['instance']['domainName'] }}"
   gather_facts: yes
+  become: true
+  become_user: ueqbal
   vars:
     morpheus_url: "ueqbal-morph-appliance.localdomain"
     ansible_python_interpreter: /usr/bin/python3
   vars_files:
     - /opt/morpheus/.local/morpheus_api_credentials.yml  
   tasks:
+    - name: "[0] - [DEBUG] - Print Decrypted API Token"
+      debug:
+        msg: "Decrypted API token: {{ api_token }}"
+        
     - name: "[1] - [Task] - Simple Google GET"
       ansible.builtin.uri:
         url: "https://www.google.co.uk"
