@@ -22,7 +22,7 @@
       
     - name: "[2] - [Task] - Call Morpheus /api/whoami to verify token"
       shell: |
-        curl -H "Authorization: Bearer {{ api_token }}" "https://{{ morpheus_url }}{{ api_endpoint }}" -vvv
+        curl -k -H "Authorization: Bearer {{ api_token }}" "https://{{ morpheus_url }}{{ api_endpoint }}" -vvv
       register: whoami_response
 
     - name: "[1] - [DEBUG] - Check Google GET response"
