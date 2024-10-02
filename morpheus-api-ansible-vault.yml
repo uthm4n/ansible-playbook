@@ -15,21 +15,23 @@
         msg: "Decrypted API token: {{ api_token }}"
         
     - name: "[1] - [Task] - Simple Google GET"
-      community.general.uri:
+      ansible.builtin.uri:
         url: "https://www.google.co.uk"
         method: GET
         validate_certs: false 
+        use_proxy: false
         return_content: true
       register: google_response
       
     - name: "[2] - [Task] - Call Morpheus /api/whoami to verify token"
-      community.general.uri:
+      ansible.builtin.uri:
         url: "https://{{ morpheus_url }}/api/whoami"
         method: GET
         headers:
           Content-Type: "application/json"
           Authorization: "Bearer {{ api_token }}"
         validate_certs: false 
+        use_proxy: false
         return_content: true
       register: whoami_response
 
